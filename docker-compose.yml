@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  db:
+    image: 'postgres:13'
+    container_name: db.postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456789
+      - POSTGRES_DB=postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  mongodb:
+    image: mongo:latest
+    container_name: db.mongo
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mohamed
+      - MONGO_INITDB_ROOT_PASSWORD=123456789
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./data:/data/db
+
+volumes:
+  postgres:
+    name: test-postgres
+  mongo:
+    name: test-mongo
