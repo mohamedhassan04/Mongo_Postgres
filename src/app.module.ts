@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './user/user.module';
+import { PostgresUser } from './user/entities/user-postgres.entity';
 
 @Module({
   imports: [
@@ -14,10 +15,12 @@ import { UserModule } from './user/user.module';
       username: 'postgres',
       password: '123456789',
       database: 'postgres',
-      entities: [],
+      entities: [PostgresUser],
       synchronize: true,
     }),
-    MongooseModule.forRoot('mongodb://localhost/nest'),
+    MongooseModule.forRoot(
+      'mongodb://mohamed:123456789@localhost:27017/?authMechanism=DEFAULT',
+    ),
     UserModule,
   ],
   controllers: [AppController],
